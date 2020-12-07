@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const SubscriptionMasterSchema = mongoose.Schema({
     subs_id:{
-        type:Number,
+        type:mongoose.Schema.Types.ObjectId,
         required:true
     },
     email:{
@@ -18,7 +18,7 @@ const SubscriptionMasterSchema = mongoose.Schema({
       },
       Dob:{
         type:Date,
-        required: true
+        
       },
     
       Homecourse_Id: {

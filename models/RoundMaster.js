@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const RoundMasterSchema = mongoose.Schema({
     round_id:{
-        type:Number,
+        type:mongoose.Schema.Types.ObjectId,
         required:true
     },
     course_id:{

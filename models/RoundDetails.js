@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const RoundDetailsSchema = mongoose.Schema({
-    round_id:{
+    Round_id:{
         type:mongoose.Schema.Types.ObjectId, ref: 'Master',
         required:true
     },
-    hole_id:{
-        type:mongoose.Schema.Types.ObjectId, ref: 'Put',
+    Hole_id:{
+        type:mongoose.Schema.Types.ObjectId, ref: 'Hole',
     },
     
       ball_1:{

@@ -5,7 +5,6 @@ const SubscriptionMaster = require('./SubscriptionMaster');
 const CourseMasterSchema = mongoose.Schema({
     courseid:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:SubsMaster,
         require:true
     },
     courseName:{

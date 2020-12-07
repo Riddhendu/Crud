@@ -1,43 +1,36 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/SubscriptionMaster');
+const Post = require('../models/CourseMaster');
 
 // To fetch the data
 router.get('/',  (req,res,next)=>{
      Post.find()
-     .populate('courseid')
+     .populate('Homecourse_Id')
      .then((posts)=>{
          res.json(posts)
      })
      .catch(err => console.log(err))
 });
- 
 //  To put some data into database
 
 router.post('/add', (req,res,next) => {
-    const subs_id = req.body.subs_id;
-    const email =req.body.email;
-    const mobile = req.body.mobile;
-    const name = req.body.name;
-    const Dob = req.body.Dob;
-    const Homecourse_Id = req.body.Homecourse_Id;
+    const courseid = req.body.courseid;
+    const coursename =req.body.coursename;
+    const city = req.body.city;
+    const record_Holder = req.body.record_Holder;
 
     let newPost = new Post ({
-        subs_id: subs_id,
-        email: email,
-        mobile: mobile,
-        name: name,
-        Dob:Dob,
-        Homecourse_Id:Homecourse_Id
+        courseid: courseid,
+        coursename: coursename,
+        city: city,
+        record_Holder:record_Holder
     });
-
-newPost.save()
+    newPost.save()
      .then(post => {
          res.json(post);
      })
      .catch(err => console.log(err));
 });
-
 //To update data
 router.put('/update/:id', (req,res,next) => {
     //grab the id of the post
@@ -45,10 +38,10 @@ router.put('/update/:id', (req,res,next) => {
     //find the post by ID from the database
     Post.findById(id)
     .then(post => {
-       post.subs_id = req.body.subs_id;
-       post.email =req.body.email;
-       post.mobile = req.body.mobile;
-       post.name = req.body.name;
+       post.courseid = req.body.courseid;
+       post.courseName =req.body.courseName;
+       post.city = req.body.city;
+       post.record_Holder = req.body.record_Holder;
        post.save()
        .then(post =>{
            res.send({message:'Post updated successfully', status: 'success' , post: post})
@@ -73,6 +66,5 @@ router.delete('/:id', (req,res,next) => {
     })
     .catch(err => console.log(err));
 }); 
-
 
 module.exports = router;

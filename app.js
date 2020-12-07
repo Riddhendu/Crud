@@ -23,18 +23,30 @@ mongoose.connect(mongoUrl,{
 const port = process.env.PORT || 3000;
 
 //Initialize cors middleware
+
 app.use(cors());
+
 
 //Initialize body-parser middleware
 app.use(bodyParser.json());
+
 
 app.get('/',(req,res)=>{
     res.send('Hello')
 });
 
 const postRoutes = require('./routes/post');
+const courseRoutes = require('./routes/course');
+const holeRoutes = require('./routes/hole');
+const roundmRoutes = require('./routes/roundm');
+const roundDRoutes = require('./routes/roundD');
 
 app.use('/api/posts',postRoutes);
+app.use('/courses',courseRoutes);
+app.use('/holes',holeRoutes);
+app.use('/roundmaster',roundmRoutes);
+app.use('/rounddetails',roundDRoutes);
+
 
 
 app.listen(port,()=>{

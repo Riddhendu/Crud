@@ -1,43 +1,37 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/SubscriptionMaster');
+const Post = require('../models/HoleMaster');
 
 // To fetch the data
 router.get('/',  (req,res,next)=>{
-     Post.find()
-     .populate('courseid')
-     .then((posts)=>{
-         res.json(posts)
-     })
-     .catch(err => console.log(err))
+    Post.find()
+    .populate('Hole_id')
+    .then((posts)=>{
+        res.json(posts)
+    })
+    .catch(err => console.log(err))
 });
- 
 //  To put some data into database
 
 router.post('/add', (req,res,next) => {
-    const subs_id = req.body.subs_id;
-    const email =req.body.email;
-    const mobile = req.body.mobile;
-    const name = req.body.name;
-    const Dob = req.body.Dob;
-    const Homecourse_Id = req.body.Homecourse_Id;
+    const course_id =req.body.course_id;
+    const hole_id= req.body.hole_id;
+    const par = req.body.par;
+    const image_link = req.body.image_link;
+
 
     let newPost = new Post ({
-        subs_id: subs_id,
-        email: email,
-        mobile: mobile,
-        name: name,
-        Dob:Dob,
-        Homecourse_Id:Homecourse_Id
+        course_id: course_id,
+        hole_id: hole_id,
+        par: par,
+        image_link:image_link
     });
-
-newPost.save()
+    newPost.save()
      .then(post => {
          res.json(post);
      })
      .catch(err => console.log(err));
 });
-
 //To update data
 router.put('/update/:id', (req,res,next) => {
     //grab the id of the post
@@ -45,10 +39,10 @@ router.put('/update/:id', (req,res,next) => {
     //find the post by ID from the database
     Post.findById(id)
     .then(post => {
-       post.subs_id = req.body.subs_id;
-       post.email =req.body.email;
-       post.mobile = req.body.mobile;
-       post.name = req.body.name;
+       post.course_id = req.body.course_id;
+       post.hole_id =req.body.hole_id;
+       post.hole_num = req.body.hole_num;
+       post.image_link = req.body.image_link;
        post.save()
        .then(post =>{
            res.send({message:'Post updated successfully', status: 'success' , post: post})
@@ -73,6 +67,5 @@ router.delete('/:id', (req,res,next) => {
     })
     .catch(err => console.log(err));
 }); 
-
 
 module.exports = router;

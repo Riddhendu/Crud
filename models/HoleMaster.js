@@ -6,9 +6,13 @@ const HoleMasterSchema = mongoose.Schema({
         required:true
     },
     hole_id:{
-        type:number
+        type:mongoose.Schema.Types.ObjectId
     },
     hole_num:{
+        type:Number,
+        required:true
+    },
+    par:{
         type:Number,
         required:true
     },
@@ -19,4 +23,4 @@ const HoleMasterSchema = mongoose.Schema({
     
      
 });
- const Put = module.exports = mongoose.model('Put',HoleMasterSchema );
+ const Hole = module.exports = mongoose.model('Hole',HoleMasterSchema );
