@@ -16,6 +16,7 @@ router.get('/',  (req,res,next)=>{
 router.post('/add', (req,res,next) => {
     const course_id =req.body.course_id;
     const hole_id= req.body.hole_id;
+    const hole_num = req.body.hole_num;
     const par = req.body.par;
     const image_link = req.body.image_link;
 
@@ -23,6 +24,7 @@ router.post('/add', (req,res,next) => {
     let newPost = new Post ({
         course_id: course_id,
         hole_id: hole_id,
+        hole_num: hole_num,
         par: par,
         image_link:image_link
     });
@@ -42,6 +44,7 @@ router.put('/update/:id', (req,res,next) => {
        post.course_id = req.body.course_id;
        post.hole_id =req.body.hole_id;
        post.hole_num = req.body.hole_num;
+       post.par=req.body.par;
        post.image_link = req.body.image_link;
        post.save()
        .then(post =>{

@@ -5,7 +5,7 @@ const Post = require('../models/RoundDetails');
 // To fetch the data
 router.get('/',  (req,res,next)=>{
     Post.find()
-    .populate('round_id')
+    .populate('Round_id')
     .populate('hole_id')
     .then((posts)=>{
         res.json(posts)
@@ -15,7 +15,7 @@ router.get('/',  (req,res,next)=>{
 //  To put some data into database
 
 router.post('/add', (req,res,next) => {
-    const round_id =req.body.round_id;
+    const Round_id =req.body.Round_id;
     const Hole_id= req.body.Hole_id;
     const ball_1 = req.body.ball_1;
     const ball_2 = req.body.ball_2;
@@ -24,7 +24,7 @@ router.post('/add', (req,res,next) => {
 
 
     let newPost = new Post ({
-        round_id: round_id,
+        Round_id: Round_id,
         Hole_id: Hole_id,
         ball_1: ball_1,
         ball_2:ball_2,
@@ -44,7 +44,7 @@ router.put('/update/:id', (req,res,next) => {
     //find the post by ID from the database
     Post.findById(id)
     .then(post => {
-       post.round_id = req.body.round_id;
+       post.Round_id = req.body.Round_id;
        post.Hole_id =req.body.Hole_id;
        post.ball_1 = req.body.ball_1;
        post.ball_2 = req.body.ball_2;
